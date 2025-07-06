@@ -62,7 +62,5 @@ temp/
 
 .github/
 
-DEPLOYMENT_CHECKLIST.md
-DEPLOYMENT.md
-GOOGLE_SETUP_GUIDE.md
-README.md
+
+*.md
