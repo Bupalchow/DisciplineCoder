@@ -10,6 +10,7 @@ import {
   ClockIcon,
   ChartBarIcon,
   ArrowRightIcon,
+  AcademicCapIcon,
 } from '@heroicons/react/24/outline';
 import { MainLayout } from '../components/templates';
 import { Card, Button, Badge, LoadingSpinner, FirebaseSetupGuide } from '../components/atoms';
@@ -269,7 +270,14 @@ const DashboardPage = () => {
         {/* Quick Actions */}
         <Card className="p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link to="/roadmap">
+              <Button variant="primary" className="w-full">
+                <AcademicCapIcon className="h-4 w-4 mr-2" />
+                DSA Roadmap
+              </Button>
+            </Link>
+            
             <Link to="/contests">
               <Button variant="outline" className="w-full">
                 <CalendarIcon className="h-4 w-4 mr-2" />

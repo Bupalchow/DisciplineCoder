@@ -13,6 +13,7 @@ import {
   SettingsPage,
   LoginPage,
   RegisterPage,
+  RoadmapPage,
 } from './pages';
 
 /**
@@ -101,6 +102,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <SettingsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap"
+                element={
+                  <ProtectedRoute>
+                    <RoadmapPage />
                   </ProtectedRoute>
                 }
               />

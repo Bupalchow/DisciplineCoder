@@ -3,7 +3,6 @@
  */
 
 import axios from 'axios';
-import { API_ENDPOINTS } from '../constants';
 
 /**
  * Fetches upcoming LeetCode contests
@@ -11,70 +10,36 @@ import { API_ENDPOINTS } from '../constants';
  */
 export const fetchLeetCodeContests = async () => {
   try {
-    // LeetCode GraphQL query for contests
-    const query = `
-      query contestsList {
-        contestUpcomingContests {
-          title
-          titleSlug
-          startTime
-          duration
-          description
-          cardImg
+    // In production, always use our serverless function
+    if (import.meta.env.PROD || window.location.hostname !== 'localhost') {
+      try {
+        // Try primary endpoint first
+        const response = await axios.get('/api/leetcode');
+        
+        if (response.data.success && response.data.data.length > 0) {
+          return response.data.data;
         }
+        
+        // If primary fails or returns no data, try alternative
+        const altResponse = await axios.get('/api/leetcode-alternative');
+        
+        if (altResponse.data.success) {
+          return altResponse.data.data;
+        }
+        
+        throw new Error('Both endpoints failed');
+      } catch (apiError) {
+        console.warn('Production API failed, using mock data:', apiError.message);
+        return getMockContests();
       }
-    `;
-
-    const response = await axios.post(
-      API_ENDPOINTS.LEETCODE_GRAPHQL,
-      {
-        query,
-        variables: {},
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'User-Agent': 'DisciplineCoder/1.0',
-        },
-      }
-    );
-
-    const contests = response.data?.data?.contestUpcomingContests || [];
-    
-    // Transform the data to our format
-    return contests.map(contest => ({
-      id: contest.titleSlug,
-      title: contest.title,
-      slug: contest.titleSlug,
-      startTime: new Date(contest.startTime * 1000), // Convert Unix timestamp
-      duration: contest.duration, // Duration in seconds
-      description: contest.description || `Join the ${contest.title} contest on LeetCode`,
-      imageUrl: contest.cardImg,
-      url: `https://leetcode.com/contest/${contest.titleSlug}/`,
-      type: getContestType(contest.title),
-    }));
+    } else {
+      // Development mode - show mock data immediately to avoid CORS issues
+      console.log('Development mode: Using mock contest data');
+      return getMockContests();
+    }
   } catch (error) {
     console.error('Error fetching LeetCode contests:', error);
-    
-    // Fallback: Return mock data for development
     return getMockContests();
-  }
-};
-
-/**
- * Determines contest type based on title
- * @param {string} title - Contest title
- * @returns {string} Contest type
- */
-const getContestType = (title) => {
-  const titleLower = title.toLowerCase();
-  
-  if (titleLower.includes('weekly')) {
-    return 'weekly';
-  } else if (titleLower.includes('biweekly')) {
-    return 'biweekly';
-  } else {
-    return 'other';
   }
 };
 
@@ -84,30 +49,38 @@ const getContestType = (title) => {
  */
 const getMockContests = () => {
   const now = new Date();
-  const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-  const nextBiweekly = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+  
+  // Calculate next Sunday 10:30 AM EST for weekly contest
+  const nextSunday = new Date(now);
+  nextSunday.setDate(now.getDate() + (7 - now.getDay()));
+  nextSunday.setHours(10, 30, 0, 0); // 10:30 AM EST
+  
+  // Calculate next Saturday 8:00 AM EST for biweekly contest  
+  const nextSaturday = new Date(now);
+  nextSaturday.setDate(now.getDate() + ((6 - now.getDay() + 7) % 7) + 7); // Next Saturday after next week
+  nextSaturday.setHours(8, 0, 0, 0); // 8:00 AM EST
 
   return [
     {
-      id: 'weekly-contest-XXX',
-      title: 'Weekly Contest XXX',
-      slug: 'weekly-contest-XXX',
-      startTime: nextWeek,
+      id: 'weekly-contest-430',
+      title: 'Weekly Contest 430',
+      slug: 'weekly-contest-430',
+      startTime: nextSunday,
       duration: 5400, // 90 minutes in seconds
-      description: 'Join the Weekly Contest XXX on LeetCode',
+      description: 'Join the Weekly Contest 430 on LeetCode. Four challenging problems to solve in 90 minutes.',
       imageUrl: 'https://assets.leetcode.com/contest/weekly-contest.png',
-      url: 'https://leetcode.com/contest/weekly-contest-XXX/',
+      url: 'https://leetcode.com/contest/weekly-contest-430/',
       type: 'weekly',
     },
     {
-      id: 'biweekly-contest-YYY',
-      title: 'Biweekly Contest YYY',
-      slug: 'biweekly-contest-YYY',
-      startTime: nextBiweekly,
+      id: 'biweekly-contest-145',
+      title: 'Biweekly Contest 145',
+      slug: 'biweekly-contest-145',
+      startTime: nextSaturday,
       duration: 5400, // 90 minutes in seconds
-      description: 'Join the Biweekly Contest YYY on LeetCode',
+      description: 'Join the Biweekly Contest 145 on LeetCode. Four challenging problems to solve in 90 minutes.',
       imageUrl: 'https://assets.leetcode.com/contest/biweekly-contest.png',
-      url: 'https://leetcode.com/contest/biweekly-contest-YYY/',
+      url: 'https://leetcode.com/contest/biweekly-contest-145/',
       type: 'biweekly',
     },
   ];

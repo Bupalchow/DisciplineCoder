@@ -5,7 +5,9 @@
 // API Base URLs
 export const API_ENDPOINTS = {
   LEETCODE_CONTESTS: 'https://leetcode.com/api/problems/contest/',
-  LEETCODE_GRAPHQL: 'https://leetcode.com/graphql',
+  LEETCODE_GRAPHQL: import.meta.env.PROD 
+    ? '/api/leetcode'  // Use our proxy in production
+    : 'https://leetcode.com/graphql', // Direct in development (may fail due to CORS)
   GOOGLE_CALENDAR: 'https://www.googleapis.com/calendar/v3',
 };
 
