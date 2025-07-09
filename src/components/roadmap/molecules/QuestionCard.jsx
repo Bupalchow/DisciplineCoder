@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { 
-  ExternalLinkIcon, 
+  ArrowTopRightOnSquareIcon, 
   LightBulbIcon, 
   ClockIcon,
   CpuChipIcon,
@@ -129,7 +129,7 @@ const QuestionCard = ({ question, status = QUESTION_STATUS.NOT_STARTED, onStatus
           onClick={() => window.open(question.url, '_blank')}
           className="flex items-center gap-2"
         >
-          <ExternalLinkIcon className="h-4 w-4" />
+          <ArrowTopRightOnSquareIcon className="h-4 w-4" />
           Solve on LeetCode
         </Button>
 

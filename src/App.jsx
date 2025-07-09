@@ -14,6 +14,9 @@ import {
   LoginPage,
   RegisterPage,
   RoadmapPage,
+  RoadmapSelectionPage,
+  ArraysRoadmapPage,
+  StringsRoadmapPage,
 } from './pages';
 
 /**
@@ -109,7 +112,23 @@ function App() {
                 path="/roadmap"
                 element={
                   <ProtectedRoute>
-                    <RoadmapPage />
+                    <RoadmapSelectionPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap/arrays"
+                element={
+                  <ProtectedRoute>
+                    <ArraysRoadmapPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap/strings"
+                element={
+                  <ProtectedRoute>
+                    <StringsRoadmapPage />
                   </ProtectedRoute>
                 }
               />
