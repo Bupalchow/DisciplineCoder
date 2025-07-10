@@ -13,6 +13,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { ARRAYS_ROADMAP } from '../data/arraysRoadmap';
 import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
+import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 import { Button } from '../components/atoms';
 
@@ -23,6 +24,7 @@ import { Button } from '../components/atoms';
 const RoadmapSelectionPage = () => {
   const arraysProgress = useRoadmapProgress(ARRAYS_ROADMAP.id);
   const stringsProgress = useRoadmapProgress(STRINGS_ROADMAP.id);
+  const hashmapsSetsProgress = useRoadmapProgress(HASHMAPS_SETS_ROADMAP.id);
 
   const roadmaps = [
     {
@@ -38,6 +40,13 @@ const RoadmapSelectionPage = () => {
       route: '/roadmap/strings',
       icon: '🔤',
       color: 'purple'
+    },
+    {
+      data: HASHMAPS_SETS_ROADMAP,
+      progress: hashmapsSetsProgress,
+      route: '/roadmap/hashmaps-sets',
+      icon: '🗂️',
+      color: 'indigo'
     }
   ];
 
@@ -56,6 +65,13 @@ const RoadmapSelectionPage = () => {
         text: 'text-purple-900',
         accent: 'text-purple-600',
         button: 'bg-purple-600 hover:bg-purple-700'
+      },
+      indigo: {
+        bg: 'bg-indigo-50',
+        border: 'border-indigo-200',
+        text: 'text-indigo-900',
+        accent: 'text-indigo-600',
+        button: 'bg-indigo-600 hover:bg-indigo-700'
       }
     };
     return colors[color] || colors.blue;
@@ -108,7 +124,7 @@ const RoadmapSelectionPage = () => {
         </div>
 
         {/* Roadmap Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {roadmaps.map((roadmap) => {
             const stats = roadmap.progress.getProgressStats(roadmap.data);
             const colors = getColorClasses(roadmap.color);

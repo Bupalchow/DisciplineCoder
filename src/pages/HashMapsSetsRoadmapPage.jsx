@@ -1,6 +1,6 @@
 /**
- * Strings Roadmap Page
- * Specific page for the Strings learning roadmap
+ * HashMaps & Sets Roadmap Page
+ * Specific page for the HashMaps & Sets learning roadmap
  */
 
 import { useState } from 'react';
@@ -12,27 +12,27 @@ import {
   BookOpenIcon
 } from '@heroicons/react/24/outline';
 import { RoadmapContainer } from '../components/roadmap/organisms';
-import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
+import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 import { Button } from '../components/atoms';
 
 /**
- * StringsRoadmapPage component
- * Displays the complete Strings roadmap interface
+ * HashMapsSetsRoadmapPage component
+ * Displays the complete HashMaps & Sets roadmap interface
  */
-const StringsRoadmapPage = () => {
+const HashMapsSetsRoadmapPage = () => {
   const {
     progress,
     isLoading,
     updateQuestionStatus,
     resetProgress,
     getProgressStats
-  } = useRoadmapProgress(STRINGS_ROADMAP.id);
+  } = useRoadmapProgress(HASHMAPS_SETS_ROADMAP.id);
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   // Get progress statistics
-  const stats = getProgressStats(STRINGS_ROADMAP);
+  const stats = getProgressStats(HASHMAPS_SETS_ROADMAP);
 
   // Handle reset confirmation
   const handleResetProgress = () => {
@@ -44,7 +44,7 @@ const StringsRoadmapPage = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <AcademicCapIcon className="h-12 w-12 text-purple-600 mx-auto mb-4 animate-pulse" />
+          <AcademicCapIcon className="h-12 w-12 text-indigo-600 mx-auto mb-4 animate-pulse" />
           <p className="text-gray-600">Loading your progress...</p>
         </div>
       </div>
@@ -70,9 +70,9 @@ const StringsRoadmapPage = () => {
             {/* Page Title */}
             <div className="flex-1 flex justify-center">
               <div className="flex items-center space-x-3">
-                <span className="text-2xl">🔤</span>
+                <span className="text-2xl">🗂️</span>
                 <h1 className="text-xl font-semibold text-gray-900">
-                  Strings Roadmap
+                  HashMaps & Sets Roadmap
                 </h1>
               </div>
             </div>
@@ -103,7 +103,7 @@ const StringsRoadmapPage = () => {
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <BookOpenIcon className="h-8 w-8 text-purple-600" />
+                <BookOpenIcon className="h-8 w-8 text-indigo-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500">Total Questions</p>
@@ -143,11 +143,11 @@ const StringsRoadmapPage = () => {
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <ChartBarIcon className="h-8 w-8 text-purple-600" />
+                <ChartBarIcon className="h-8 w-8 text-indigo-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500">Progress</p>
-                <p className="text-2xl font-bold text-purple-600">{stats.percentage}%</p>
+                <p className="text-2xl font-bold text-indigo-600">{stats.percentage}%</p>
               </div>
             </div>
           </div>
@@ -155,7 +155,7 @@ const StringsRoadmapPage = () => {
 
         {/* Roadmap Container */}
         <RoadmapContainer
-          roadmapData={STRINGS_ROADMAP}
+          roadmapData={HASHMAPS_SETS_ROADMAP}
           progress={progress}
           onQuestionStatusChange={updateQuestionStatus}
           progressStats={stats}
@@ -170,7 +170,7 @@ const StringsRoadmapPage = () => {
               Reset Progress
             </h3>
             <p className="text-sm text-gray-600 mb-6">
-              Are you sure you want to reset all your Strings roadmap progress? This action cannot be undone.
+              Are you sure you want to reset all your HashMaps & Sets roadmap progress? This action cannot be undone.
             </p>
             <div className="flex justify-end space-x-3">
               <Button
@@ -194,4 +194,4 @@ const StringsRoadmapPage = () => {
   );
 };
 
-export default StringsRoadmapPage;
+export default HashMapsSetsRoadmapPage;

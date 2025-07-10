@@ -14,9 +14,9 @@ import {
   LoginPage,
   RegisterPage,
   RoadmapPage,
-  RoadmapSelectionPage,
   ArraysRoadmapPage,
   StringsRoadmapPage,
+  HashMapsSetsRoadmapPage,
 } from './pages';
 
 /**
@@ -93,6 +93,14 @@ function App() {
                 }
               />
               <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <DashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/contests"
                 element={
                   <ProtectedRoute>
@@ -109,14 +117,6 @@ function App() {
                 }
               />
               <Route
-                path="/roadmap"
-                element={
-                  <ProtectedRoute>
-                    <RoadmapSelectionPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
                 path="/roadmap/arrays"
                 element={
                   <ProtectedRoute>
@@ -129,6 +129,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <StringsRoadmapPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap/hashmaps-sets"
+                element={
+                  <ProtectedRoute>
+                    <HashMapsSetsRoadmapPage />
                   </ProtectedRoute>
                 }
               />
