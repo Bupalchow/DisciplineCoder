@@ -10,7 +10,6 @@ import {
   Bars3Icon,
   XMarkIcon,
   UserCircleIcon,
-  CalendarIcon,
   HomeIcon,
   CogIcon,
 } from '@heroicons/react/24/outline';
@@ -21,7 +20,6 @@ import { APP_CONFIG } from '../../constants';
 
 const navigation = [
   { name: 'Dashboard', to: '/', icon: HomeIcon },
-  { name: 'Contests', to: '/contests', icon: CalendarIcon },
   { name: 'Settings', to: '/settings', icon: CogIcon },
 ];
 
@@ -58,7 +56,6 @@ const Header = () => {
                     to="/"
                     className="flex items-center space-x-2"
                   >
-                    <CalendarIcon className="h-8 w-8 text-blue-600" />
                     <span className="text-xl font-bold text-gray-900">
                       {APP_CONFIG.APP_NAME}
                     </span>

@@ -12,10 +12,10 @@ import {
   SettingsPage,
   LoginPage,
   RegisterPage,
-  RoadmapPage,
   ArraysRoadmapPage,
   StringsRoadmapPage,
   HashMapsSetsRoadmapPage,
+  StackRoadmapPage,
 } from './pages';
 
 /**
@@ -128,6 +128,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <HashMapsSetsRoadmapPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap/stack"
+                element={
+                  <ProtectedRoute>
+                    <StackRoadmapPage />
                   </ProtectedRoute>
                 }
               />

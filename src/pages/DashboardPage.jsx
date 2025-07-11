@@ -15,6 +15,7 @@ import { Button } from '../components/atoms';
 import { ARRAYS_ROADMAP } from '../data/arraysRoadmap';
 import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
 import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
+import { STACK_ROADMAP } from '../data/stackRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 
 /**
@@ -25,6 +26,7 @@ const DashboardPage = () => {
   const arraysProgress = useRoadmapProgress(ARRAYS_ROADMAP.id);
   const stringsProgress = useRoadmapProgress(STRINGS_ROADMAP.id);
   const hashmapsSetsProgress = useRoadmapProgress(HASHMAPS_SETS_ROADMAP.id);
+  const stackProgress = useRoadmapProgress(STACK_ROADMAP.id);
 
   const roadmaps = [
     {
@@ -47,6 +49,13 @@ const DashboardPage = () => {
       route: '/roadmap/hashmaps-sets',
       icon: '🗂️',
       color: 'indigo'
+    },
+    {
+      data: STACK_ROADMAP,
+      progress: stackProgress,
+      route: '/roadmap/stack',
+      icon: '🥞',
+      color: 'green'
     }
   ];
 
@@ -72,6 +81,13 @@ const DashboardPage = () => {
         text: 'text-indigo-900',
         accent: 'text-indigo-600',
         button: 'bg-indigo-600 hover:bg-indigo-700'
+      },
+      green: {
+        bg: 'bg-green-50',
+        border: 'border-green-200',
+        text: 'text-green-900',
+        accent: 'text-green-600',
+        button: 'bg-green-600 hover:bg-green-700'
       }
     };
     return colors[color] || colors.blue;
@@ -93,7 +109,7 @@ const DashboardPage = () => {
         </div>
 
         {/* Roadmap Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {roadmaps.map((roadmap) => {
             const colorClasses = getColorClasses(roadmap.color);
             const progressStats = roadmap.progress.getProgressStats(roadmap.data);
@@ -217,9 +233,9 @@ const DashboardPage = () => {
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
             </Link>
-            <Link to="/roadmap/strings">
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white">
-                Start with Strings
+            <Link to="/roadmap/stack">
+              <Button className="bg-green-600 hover:bg-green-700 text-white">
+                Try Stack Problems
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
             </Link>
