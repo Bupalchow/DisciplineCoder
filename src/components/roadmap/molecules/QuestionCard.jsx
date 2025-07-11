@@ -34,29 +34,21 @@ const QuestionCard = ({ question, status = QUESTION_STATUS.NOT_STARTED, onStatus
 
   const getNextStatus = () => {
     switch (status) {
-      case QUESTION_STATUS.NOT_STARTED:
-        return QUESTION_STATUS.IN_PROGRESS;
-      case QUESTION_STATUS.IN_PROGRESS:
-        return QUESTION_STATUS.COMPLETED;
       case QUESTION_STATUS.COMPLETED:
-        return QUESTION_STATUS.REVIEWED;
-      default:
+      case QUESTION_STATUS.REVIEWED:
         return QUESTION_STATUS.NOT_STARTED;
+      default:
+        return QUESTION_STATUS.COMPLETED;
     }
   };
 
   const getStatusAction = () => {
     switch (status) {
-      case QUESTION_STATUS.NOT_STARTED:
-        return 'Start';
-      case QUESTION_STATUS.IN_PROGRESS:
-        return 'Mark Complete';
       case QUESTION_STATUS.COMPLETED:
-        return 'Mark Reviewed';
       case QUESTION_STATUS.REVIEWED:
-        return 'Reset';
+        return 'Completed ✓';
       default:
-        return 'Start';
+        return 'Mark as Complete';
     }
   };
 
@@ -114,10 +106,14 @@ const QuestionCard = ({ question, status = QUESTION_STATUS.NOT_STARTED, onStatus
       {/* Actions */}
       <div className="flex items-center gap-3 mb-4">
         <Button
-          variant="primary"
+          variant={status === QUESTION_STATUS.COMPLETED || status === QUESTION_STATUS.REVIEWED ? "solid" : "outline"}
           size="sm"
           onClick={() => handleStatusChange(getNextStatus())}
-          className="flex items-center gap-2"
+          className={`flex items-center gap-2 ${
+            status === QUESTION_STATUS.COMPLETED || status === QUESTION_STATUS.REVIEWED 
+              ? 'bg-green-600 hover:bg-green-700 text-white' 
+              : ''
+          }`}
         >
           <CheckCircleIcon className="h-4 w-4" />
           {getStatusAction()}

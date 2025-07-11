@@ -8,8 +8,7 @@ import {
   AcademicCapIcon,
   ClockIcon,
   QuestionMarkCircleIcon,
-  ArrowRightIcon,
-  CalendarIcon
+  ArrowRightIcon
 } from '@heroicons/react/24/outline';
 import { MainLayout } from '../components/templates';
 import { Button } from '../components/atoms';
@@ -93,24 +92,12 @@ const DashboardPage = () => {
           </p>
         </div>
 
-        {/* Navigation Links */}
-        <div className="flex justify-center space-x-4">
-          <Link to="/contests">
-            <Button variant="outline" className="flex items-center space-x-2">
-              <CalendarIcon className="h-4 w-4" />
-              <span>LeetCode Contests</span>
-            </Button>
-          </Link>
-        </div>
-
         {/* Roadmap Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {roadmaps.map((roadmap) => {
             const colorClasses = getColorClasses(roadmap.color);
-            const progressStats = roadmap.progress.getProgressStats();
-            const progressPercentage = roadmap.data.totalQuestions > 0 
-              ? Math.round((progressStats.completed / roadmap.data.totalQuestions) * 100)
-              : 0;
+            const progressStats = roadmap.progress.getProgressStats(roadmap.data);
+            const progressPercentage = progressStats.percentage;
 
             return (
               <div
@@ -230,10 +217,10 @@ const DashboardPage = () => {
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
             </Link>
-            <Link to="/contests">
-              <Button variant="outline">
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                Practice with Contests
+            <Link to="/roadmap/strings">
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                Start with Strings
+                <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>

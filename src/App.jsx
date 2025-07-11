@@ -9,7 +9,6 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { AuthProvider, useAuthContext } from './contexts';
 import {
   DashboardPage,
-  ContestsPage,
   SettingsPage,
   LoginPage,
   RegisterPage,
@@ -97,14 +96,6 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <DashboardPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/contests"
-                element={
-                  <ProtectedRoute>
-                    <ContestsPage />
                   </ProtectedRoute>
                 }
               />

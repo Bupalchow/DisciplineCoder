@@ -1,51 +1,24 @@
 /**
- * API endpoints and configuration constants
+ * Application constants
  */
-
-// API Base URLs
-export const API_ENDPOINTS = {
-  LEETCODE_CONTESTS: 'https://leetcode.com/api/problems/contest/',
-  LEETCODE_GRAPHQL: import.meta.env.PROD 
-    ? '/api/leetcode'  // Use our proxy in production
-    : 'https://leetcode.com/graphql', // Direct in development (may fail due to CORS)
-  GOOGLE_CALENDAR: 'https://www.googleapis.com/calendar/v3',
-};
-
-// Contest Types
-export const CONTEST_TYPES = {
-  WEEKLY: 'weekly',
-  BIWEEKLY: 'biweekly',
-  OTHER: 'other',
-};
-
-// Calendar Settings
-export const CALENDAR_SETTINGS = {
-  REMINDER_MINUTES: [15, 30, 60, 120], // Options for reminder time
-  DEFAULT_REMINDER: 30,
-  CONTEST_DURATION: 90, // Default contest duration in minutes
-};
 
 // Firebase Collections
 export const FIREBASE_COLLECTIONS = {
   USERS: 'users',
   USER_SETTINGS: 'userSettings',
-  CONTESTS: 'contests',
-  CALENDAR_EVENTS: 'calendarEvents',
+  ROADMAP_PROGRESS: 'roadmapProgress',
 };
 
 // Error Messages
 export const ERROR_MESSAGES = {
   NETWORK_ERROR: 'Network error. Please check your connection and try again.',
   AUTH_ERROR: 'Authentication failed. Please sign in again.',
-  CALENDAR_AUTH_ERROR: 'Failed to connect to Google Calendar. Please authorize access.',
-  CONTEST_FETCH_ERROR: 'Failed to fetch contest data. Please try again later.',
-  CALENDAR_SYNC_ERROR: 'Failed to sync with calendar. Please try again.',
+  PROGRESS_SAVE_ERROR: 'Failed to save progress. Please try again.',
 };
 
 // Success Messages
 export const SUCCESS_MESSAGES = {
-  CALENDAR_CONNECTED: 'Google Calendar connected successfully!',
-  CONTEST_ADDED: 'Contest added to calendar successfully!',
+  PROGRESS_SAVED: 'Progress saved successfully!',
   SETTINGS_SAVED: 'Settings saved successfully!',
 };
 

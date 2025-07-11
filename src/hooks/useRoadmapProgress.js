@@ -102,6 +102,7 @@ export const useRoadmapProgress = (roadmapId) => {
       const status = progress[question.id] || QUESTION_STATUS.NOT_STARTED;
       switch (status) {
         case QUESTION_STATUS.COMPLETED:
+        case QUESTION_STATUS.REVIEWED:
           completed++;
           break;
         case QUESTION_STATUS.IN_PROGRESS:
@@ -135,7 +136,8 @@ export const useRoadmapProgress = (roadmapId) => {
 
     const total = section.questions.length;
     const completed = section.questions.filter(
-      question => progress[question.id] === QUESTION_STATUS.COMPLETED
+      question => progress[question.id] === QUESTION_STATUS.COMPLETED || 
+                  progress[question.id] === QUESTION_STATUS.REVIEWED
     ).length;
     const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
