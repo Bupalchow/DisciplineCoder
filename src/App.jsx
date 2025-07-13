@@ -16,6 +16,7 @@ import {
   StringsRoadmapPage,
   HashMapsSetsRoadmapPage,
   StackRoadmapPage,
+  QueueRoadmapPage,
 } from './pages';
 
 /**
@@ -136,6 +137,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <StackRoadmapPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap/queue"
+                element={
+                  <ProtectedRoute>
+                    <QueueRoadmapPage />
                   </ProtectedRoute>
                 }
               />

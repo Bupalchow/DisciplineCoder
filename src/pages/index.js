@@ -11,3 +11,4 @@ export { default as ArraysRoadmapPage } from './ArraysRoadmapPage';
 export { default as StringsRoadmapPage } from './StringsRoadmapPage';
 export { default as HashMapsSetsRoadmapPage } from './HashMapsSetsRoadmapPage';
 export { default as StackRoadmapPage } from './StackRoadmapPage';
+export { default as QueueRoadmapPage } from './QueueRoadmapPage';

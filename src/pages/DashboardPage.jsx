@@ -16,6 +16,7 @@ import { ARRAYS_ROADMAP } from '../data/arraysRoadmap';
 import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
 import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
 import { STACK_ROADMAP } from '../data/stackRoadmap';
+import { QUEUE_ROADMAP } from '../data/queueRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 
 /**
@@ -27,6 +28,7 @@ const DashboardPage = () => {
   const stringsProgress = useRoadmapProgress(STRINGS_ROADMAP.id);
   const hashmapsSetsProgress = useRoadmapProgress(HASHMAPS_SETS_ROADMAP.id);
   const stackProgress = useRoadmapProgress(STACK_ROADMAP.id);
+  const queueProgress = useRoadmapProgress(QUEUE_ROADMAP.id);
 
   const roadmaps = [
     {
@@ -56,6 +58,13 @@ const DashboardPage = () => {
       route: '/roadmap/stack',
       icon: '🥞',
       color: 'green'
+    },
+    {
+      data: QUEUE_ROADMAP,
+      progress: queueProgress,
+      route: '/roadmap/queue',
+      icon: '🚶‍➡️',
+      color: 'orange'
     }
   ];
 
@@ -88,6 +97,13 @@ const DashboardPage = () => {
         text: 'text-green-900',
         accent: 'text-green-600',
         button: 'bg-green-600 hover:bg-green-700'
+      },
+      orange: {
+        bg: 'bg-orange-50',
+        border: 'border-orange-200',
+        text: 'text-orange-900',
+        accent: 'text-orange-600',
+        button: 'bg-orange-600 hover:bg-orange-700'
       }
     };
     return colors[color] || colors.blue;
@@ -104,12 +120,12 @@ const DashboardPage = () => {
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Master Data Structures & Algorithms with our curated learning paths. 
-            Start with the fundamentals and progress to advanced concepts.
+            From basic arrays to advanced queues - build your skills progressively.
           </p>
         </div>
 
         {/* Roadmap Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-7xl mx-auto">
           {roadmaps.map((roadmap) => {
             const colorClasses = getColorClasses(roadmap.color);
             const progressStats = roadmap.progress.getProgressStats(roadmap.data);
@@ -233,9 +249,9 @@ const DashboardPage = () => {
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
             </Link>
-            <Link to="/roadmap/stack">
-              <Button className="bg-green-600 hover:bg-green-700 text-white">
-                Try Stack Problems
+            <Link to="/roadmap/queue">
+              <Button className="bg-orange-600 hover:bg-orange-700 text-white">
+                Try Queue Problems
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
               </Button>
             </Link>
