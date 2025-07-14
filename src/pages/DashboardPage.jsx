@@ -17,6 +17,7 @@ import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
 import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
 import { STACK_ROADMAP } from '../data/stackRoadmap';
 import { QUEUE_ROADMAP } from '../data/queueRoadmap';
+import { LINKED_LISTS_ROADMAP } from '../data/linkedListsRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 
 /**
@@ -29,6 +30,7 @@ const DashboardPage = () => {
   const hashmapsSetsProgress = useRoadmapProgress(HASHMAPS_SETS_ROADMAP.id);
   const stackProgress = useRoadmapProgress(STACK_ROADMAP.id);
   const queueProgress = useRoadmapProgress(QUEUE_ROADMAP.id);
+  const linkedListsProgress = useRoadmapProgress(LINKED_LISTS_ROADMAP.id);
 
   const roadmaps = [
     {
@@ -65,6 +67,13 @@ const DashboardPage = () => {
       route: '/roadmap/queue',
       icon: '🚶‍➡️',
       color: 'orange'
+    },
+    {
+      data: LINKED_LISTS_ROADMAP,
+      progress: linkedListsProgress,
+      route: '/roadmap/linked-lists',
+      icon: '🔗',
+      color: 'teal'
     }
   ];
 
@@ -104,6 +113,13 @@ const DashboardPage = () => {
         text: 'text-orange-900',
         accent: 'text-orange-600',
         button: 'bg-orange-600 hover:bg-orange-700'
+      },
+      teal: {
+        bg: 'bg-teal-50',
+        border: 'border-teal-200',
+        text: 'text-teal-900',
+        accent: 'text-teal-600',
+        button: 'bg-teal-600 hover:bg-teal-700'
       }
     };
     return colors[color] || colors.blue;
