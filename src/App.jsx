@@ -18,6 +18,7 @@ import {
   StackRoadmapPage,
   QueueRoadmapPage,
   LinkedListsRoadmapPage,
+  TreesRoadmapPage,
 } from './pages';
 
 /**
@@ -154,6 +155,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <LinkedListsRoadmapPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap/trees"
+                element={
+                  <ProtectedRoute>
+                    <TreesRoadmapPage />
                   </ProtectedRoute>
                 }
               />

@@ -18,6 +18,7 @@ import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
 import { STACK_ROADMAP } from '../data/stackRoadmap';
 import { QUEUE_ROADMAP } from '../data/queueRoadmap';
 import { LINKED_LISTS_ROADMAP } from '../data/linkedListsRoadmap';
+import { TREES_ROADMAP } from '../data/treesRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 
 /**
@@ -31,6 +32,7 @@ const DashboardPage = () => {
   const stackProgress = useRoadmapProgress(STACK_ROADMAP.id);
   const queueProgress = useRoadmapProgress(QUEUE_ROADMAP.id);
   const linkedListsProgress = useRoadmapProgress(LINKED_LISTS_ROADMAP.id);
+  const treesProgress = useRoadmapProgress(TREES_ROADMAP.id);
 
   const roadmaps = [
     {
@@ -74,6 +76,13 @@ const DashboardPage = () => {
       route: '/roadmap/linked-lists',
       icon: '🔗',
       color: 'teal'
+    },
+    {
+      data: TREES_ROADMAP,
+      progress: treesProgress,
+      route: '/roadmap/trees',
+      icon: '🌳',
+      color: 'emerald'
     }
   ];
 
@@ -120,6 +129,13 @@ const DashboardPage = () => {
         text: 'text-teal-900',
         accent: 'text-teal-600',
         button: 'bg-teal-600 hover:bg-teal-700'
+      },
+      emerald: {
+        bg: 'bg-emerald-50',
+        border: 'border-emerald-200',
+        text: 'text-emerald-900',
+        accent: 'text-emerald-600',
+        button: 'bg-emerald-600 hover:bg-emerald-700'
       }
     };
     return colors[color] || colors.blue;
@@ -141,7 +157,7 @@ const DashboardPage = () => {
         </div>
 
         {/* Roadmap Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {roadmaps.map((roadmap) => {
             const colorClasses = getColorClasses(roadmap.color);
             const progressStats = roadmap.progress.getProgressStats(roadmap.data);
