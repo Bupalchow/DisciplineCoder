@@ -20,6 +20,8 @@ import {
   LinkedListsRoadmapPage,
   TreesRoadmapPage,
   BacktrackingRoadmapPage,
+  DynamicProgrammingRoadmapPage,
+  BinarySearchRoadmapPage,
 } from './pages';
 
 /**
@@ -172,6 +174,22 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <BacktrackingRoadmapPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap/dynamic-programming"
+                element={
+                  <ProtectedRoute>
+                    <DynamicProgrammingRoadmapPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roadmap/binary-search"
+                element={
+                  <ProtectedRoute>
+                    <BinarySearchRoadmapPage />
                   </ProtectedRoute>
                 }
               />

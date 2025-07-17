@@ -14,3 +14,6 @@ export { default as StackRoadmapPage } from './StackRoadmapPage';
 export { default as QueueRoadmapPage } from './QueueRoadmapPage';
 export { default as LinkedListsRoadmapPage } from './LinkedListsRoadmapPage';
 export { default as TreesRoadmapPage } from './TreesRoadmapPage';
+export { default as BacktrackingRoadmapPage } from './BacktrackingRoadmapPage';
+export { default as DynamicProgrammingRoadmapPage } from './DynamicProgrammingRoadmapPage';
+export { default as BinarySearchRoadmapPage } from './BinarySearchRoadmapPage';

@@ -20,6 +20,8 @@ import { QUEUE_ROADMAP } from '../data/queueRoadmap';
 import { LINKED_LISTS_ROADMAP } from '../data/linkedListsRoadmap';
 import { TREES_ROADMAP } from '../data/treesRoadmap';
 import { BACKTRACKING_ROADMAP } from '../data/backtrackingRoadmap';
+import { DYNAMIC_PROGRAMMING_ROADMAP } from '../data/dynamicProgrammingRoadmap';
+import { BINARY_SEARCH_ROADMAP } from '../data/binarySearchRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 
 /**
@@ -35,6 +37,8 @@ const DashboardPage = () => {
   const linkedListsProgress = useRoadmapProgress(LINKED_LISTS_ROADMAP.id);
   const treesProgress = useRoadmapProgress(TREES_ROADMAP.id);
   const backtrackingProgress = useRoadmapProgress(BACKTRACKING_ROADMAP.id);
+  const dynamicProgrammingProgress = useRoadmapProgress(DYNAMIC_PROGRAMMING_ROADMAP.id);
+  const binarySearchProgress = useRoadmapProgress(BINARY_SEARCH_ROADMAP.id);
 
   const roadmaps = [
     {
@@ -92,6 +96,20 @@ const DashboardPage = () => {
       route: '/roadmap/backtracking',
       icon: '🔄',
       color: 'red'
+    },
+    {
+      data: DYNAMIC_PROGRAMMING_ROADMAP,
+      progress: dynamicProgrammingProgress,
+      route: '/roadmap/dynamic-programming',
+      icon: '🧮',
+      color: 'violet'
+    },
+    {
+      data: BINARY_SEARCH_ROADMAP,
+      progress: binarySearchProgress,
+      route: '/roadmap/binary-search',
+      icon: '🔍',
+      color: 'cyan'
     }
   ];
 
@@ -152,6 +170,20 @@ const DashboardPage = () => {
         text: 'text-red-900',
         accent: 'text-red-600',
         button: 'bg-red-600 hover:bg-red-700'
+      },
+      violet: {
+        bg: 'bg-violet-50',
+        border: 'border-violet-200',
+        text: 'text-violet-900',
+        accent: 'text-violet-600',
+        button: 'bg-violet-600 hover:bg-violet-700'
+      },
+      cyan: {
+        bg: 'bg-cyan-50',
+        border: 'border-cyan-200',
+        text: 'text-cyan-900',
+        accent: 'text-cyan-600',
+        button: 'bg-cyan-600 hover:bg-cyan-700'
       }
     };
     return colors[color] || colors.blue;
