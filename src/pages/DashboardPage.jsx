@@ -19,6 +19,7 @@ import { STACK_ROADMAP } from '../data/stackRoadmap';
 import { QUEUE_ROADMAP } from '../data/queueRoadmap';
 import { LINKED_LISTS_ROADMAP } from '../data/linkedListsRoadmap';
 import { TREES_ROADMAP } from '../data/treesRoadmap';
+import { BACKTRACKING_ROADMAP } from '../data/backtrackingRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 
 /**
@@ -33,6 +34,7 @@ const DashboardPage = () => {
   const queueProgress = useRoadmapProgress(QUEUE_ROADMAP.id);
   const linkedListsProgress = useRoadmapProgress(LINKED_LISTS_ROADMAP.id);
   const treesProgress = useRoadmapProgress(TREES_ROADMAP.id);
+  const backtrackingProgress = useRoadmapProgress(BACKTRACKING_ROADMAP.id);
 
   const roadmaps = [
     {
@@ -83,6 +85,13 @@ const DashboardPage = () => {
       route: '/roadmap/trees',
       icon: '🌳',
       color: 'emerald'
+    },
+    {
+      data: BACKTRACKING_ROADMAP,
+      progress: backtrackingProgress,
+      route: '/roadmap/backtracking',
+      icon: '🔄',
+      color: 'red'
     }
   ];
 
@@ -136,6 +145,13 @@ const DashboardPage = () => {
         text: 'text-emerald-900',
         accent: 'text-emerald-600',
         button: 'bg-emerald-600 hover:bg-emerald-700'
+      },
+      red: {
+        bg: 'bg-red-50',
+        border: 'border-red-200',
+        text: 'text-red-900',
+        accent: 'text-red-600',
+        button: 'bg-red-600 hover:bg-red-700'
       }
     };
     return colors[color] || colors.blue;
