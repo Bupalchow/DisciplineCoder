@@ -7,6 +7,7 @@ export { default as DashboardPage } from './DashboardPage';
 export { default as SettingsPage } from './SettingsPage';
 export { default as LoginPage } from './LoginPage';
 export { default as RegisterPage } from './RegisterPage';
+export { default as DailyChallengePage } from './DailyChallengePage';
 export { default as ArraysRoadmapPage } from './ArraysRoadmapPage';
 export { default as StringsRoadmapPage } from './StringsRoadmapPage';
 export { default as HashMapsSetsRoadmapPage } from './HashMapsSetsRoadmapPage';

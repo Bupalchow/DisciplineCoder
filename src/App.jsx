@@ -12,6 +12,7 @@ import {
   SettingsPage,
   LoginPage,
   RegisterPage,
+  DailyChallengePage,
   ArraysRoadmapPage,
   StringsRoadmapPage,
   HashMapsSetsRoadmapPage,
@@ -110,6 +111,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <SettingsPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/daily-challenge"
+                element={
+                  <ProtectedRoute>
+                    <DailyChallengePage />
                   </ProtectedRoute>
                 }
               />
