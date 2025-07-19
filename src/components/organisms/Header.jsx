@@ -13,6 +13,7 @@ import {
   HomeIcon,
   CogIcon,
   FireIcon,
+  ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '../atoms';
 import { NavItem } from '../molecules';
@@ -22,6 +23,7 @@ import { APP_CONFIG } from '../../constants';
 const navigation = [
   { name: 'Dashboard', to: '/', icon: HomeIcon },
   { name: 'Daily Challenge', to: '/daily-challenge', icon: FireIcon },
+  { name: 'Community', to: '/community', icon: ChatBubbleLeftRightIcon },
   { name: 'Settings', to: '/settings', icon: CogIcon },
 ];
 

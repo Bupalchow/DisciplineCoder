@@ -13,6 +13,7 @@ import {
   LoginPage,
   RegisterPage,
   DailyChallengePage,
+  CommunityPage,
   ArraysRoadmapPage,
   StringsRoadmapPage,
   HashMapsSetsRoadmapPage,
@@ -119,6 +120,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <DailyChallengePage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/community"
+                element={
+                  <ProtectedRoute>
+                    <CommunityPage />
                   </ProtectedRoute>
                 }
               />
