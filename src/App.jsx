@@ -14,6 +14,7 @@ import {
   RegisterPage,
   DailyChallengePage,
   CommunityPage,
+  CodeReviewPage,
   ArraysRoadmapPage,
   StringsRoadmapPage,
   HashMapsSetsRoadmapPage,
@@ -128,6 +129,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <CommunityPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/code-review"
+                element={
+                  <ProtectedRoute>
+                    <CodeReviewPage />
                   </ProtectedRoute>
                 }
               />

@@ -10,8 +10,9 @@ import {
   QuestionMarkCircleIcon,
   ArrowRightIcon
 } from '@heroicons/react/24/outline';
-import { MainLayout } from '../components/templates';
+import MainLayout from '../components/templates/MainLayout';
 import { Button } from '../components/atoms';
+import { CodeReviewWidget } from '../components/dashboard/molecules/CodeReviewWidget';
 import { ARRAYS_ROADMAP } from '../data/arraysRoadmap';
 import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
 import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
@@ -23,6 +24,7 @@ import { BACKTRACKING_ROADMAP } from '../data/backtrackingRoadmap';
 import { DYNAMIC_PROGRAMMING_ROADMAP } from '../data/dynamicProgrammingRoadmap';
 import { BINARY_SEARCH_ROADMAP } from '../data/binarySearchRoadmap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
+import { useCodeReview } from '../hooks/useCodeReview';
 
 /**
  * Dashboard Page component
@@ -39,6 +41,9 @@ const DashboardPage = () => {
   const backtrackingProgress = useRoadmapProgress(BACKTRACKING_ROADMAP.id);
   const dynamicProgrammingProgress = useRoadmapProgress(DYNAMIC_PROGRAMMING_ROADMAP.id);
   const binarySearchProgress = useRoadmapProgress(BINARY_SEARCH_ROADMAP.id);
+
+  // Code Review data
+  const { statistics, latestReview } = useCodeReview();
 
   const roadmaps = [
     {
@@ -202,6 +207,11 @@ const DashboardPage = () => {
             Master Data Structures & Algorithms with our curated learning paths. 
             From basic arrays to advanced queues - build your skills progressively.
           </p>
+        </div>
+
+        {/* Code Review Widget */}
+        <div className="max-w-2xl mx-auto">
+          <CodeReviewWidget statistics={statistics} latestReview={latestReview} />
         </div>
 
         {/* Roadmap Cards */}
