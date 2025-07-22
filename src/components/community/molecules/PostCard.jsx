@@ -28,11 +28,27 @@ const PostCard = ({
   isBookmarked, 
   onVote, 
   onBookmark,
-  showFullContent = false 
+  showFullContent = false,
+  isVoting = false,
+  isBookmarking = false
 }) => {
   const getTimeAgo = (date) => {
+    if (!date) return 'unknown';
+    
     const now = new Date();
-    const postDate = new Date(date);
+    let postDate;
+    
+    // Handle different date formats
+    if (date.toDate && typeof date.toDate === 'function') {
+      postDate = date.toDate(); // Firebase Timestamp
+    } else if (date instanceof Date) {
+      postDate = date;
+    } else if (typeof date === 'string') {
+      postDate = new Date(date);
+    } else {
+      return 'unknown';
+    }
+    
     const diffInHours = Math.floor((now - postDate) / (1000 * 60 * 60));
     
     if (diffInHours < 1) return 'just now';
@@ -71,7 +87,8 @@ const PostCard = ({
     }
   };
 
-  const score = post.upvotes - post.downvotes;
+  // Calculate score from Firebase votesCount (net votes)
+  const score = post.votesCount || 0;
 
   return (
     <div className="bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors">
@@ -81,11 +98,12 @@ const PostCard = ({
           <div className="flex flex-col items-center space-y-1 min-w-0">
             <button
               onClick={() => onVote(post.id, 'upvote')}
+              disabled={isVoting}
               className={`p-1 rounded-md transition-colors ${
                 userVote === 'upvote' 
                   ? 'text-orange-600 bg-orange-50' 
                   : 'text-gray-400 hover:text-orange-600 hover:bg-orange-50'
-              }`}
+              } ${isVoting ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {userVote === 'upvote' ? (
                 <ArrowUpSolid className="h-5 w-5" />
@@ -102,11 +120,12 @@ const PostCard = ({
             
             <button
               onClick={() => onVote(post.id, 'downvote')}
+              disabled={isVoting}
               className={`p-1 rounded-md transition-colors ${
                 userVote === 'downvote' 
                   ? 'text-red-600 bg-red-50' 
                   : 'text-gray-400 hover:text-red-600 hover:bg-red-50'
-              }`}
+              } ${isVoting ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {userVote === 'downvote' ? (
                 <ArrowDownSolid className="h-5 w-5" />
@@ -184,9 +203,9 @@ const PostCard = ({
             <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
               <div className="flex items-center space-x-4 text-sm text-gray-500">
                 <div className="flex items-center space-x-1">
-                  <span className="font-medium">{post.author.username}</span>
+                  <span className="font-medium">{post.author?.username || 'Anonymous'}</span>
                   <span>•</span>
-                  <span>{post.author.reputation} rep</span>
+                  <span>{post.author?.reputation || 0} rep</span>
                 </div>
                 
                 <div className="flex items-center space-x-1">
@@ -201,16 +220,17 @@ const PostCard = ({
                   className="flex items-center space-x-1 text-gray-500 hover:text-gray-700 transition-colors"
                 >
                   <ChatBubbleLeftIcon className="h-4 w-4" />
-                  <span className="text-sm">{post.commentCount}</span>
+                  <span className="text-sm">{post.commentsCount || 0}</span>
                 </Link>
 
                 <button
                   onClick={() => onBookmark(post.id)}
+                  disabled={isBookmarking}
                   className={`p-1 rounded-md transition-colors ${
                     isBookmarked 
                       ? 'text-blue-600 bg-blue-50' 
                       : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
-                  }`}
+                  } ${isBookmarking ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   {isBookmarked ? (
                     <BookmarkSolid className="h-4 w-4" />
