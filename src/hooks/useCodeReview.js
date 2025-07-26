@@ -1,9 +1,10 @@
 /**
  * Custom hook for managing AI Code Review functionality
- * Handles code submission, analysis, and review history
+ * Handles code submission, analysis, and review history with Gemini AI integration
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import { geminiAIService } from '../services/geminiAI';
 import {
   PROGRAMMING_LANGUAGES,
   SAMPLE_PROBLEMS,
@@ -88,7 +89,38 @@ export const useCodeReview = () => {
   }, []);
 
   /**
-   * Generate mock analysis based on code characteristics
+   * Generate AI analysis using Gemini AI service
+   */
+  const generateAIAnalysis = useCallback(async (codeData) => {
+    try {
+      // Check if AI analysis is enabled
+      const isAIEnabled = import.meta.env.VITE_ENABLE_AI_REVIEW === 'true';
+      
+      if (!isAIEnabled) {
+        console.log('AI analysis is disabled, using mock analysis');
+        return generateMockAnalysis(codeData);
+      }
+
+      // Attempt to use Gemini AI
+      console.log('Starting Gemini AI analysis...');
+      const analysis = await geminiAIService.analyzeCode(codeData);
+      console.log('AI analysis completed successfully');
+      return analysis;
+      
+    } catch (error) {
+      console.error('AI analysis failed, falling back to mock analysis:', error);
+      
+      // Fallback to mock analysis if AI fails
+      const mockAnalysis = generateMockAnalysis(codeData);
+      mockAnalysis.aiError = error.message;
+      mockAnalysis.isAIGenerated = false;
+      
+      return mockAnalysis;
+    }
+  }, []);
+
+  /**
+   * Generate mock analysis based on code characteristics (fallback)
    */
   const generateMockAnalysis = (codeData) => {
     const codeLength = codeData.code.length;
@@ -123,6 +155,7 @@ export const useCodeReview = () => {
           ...(hasComments ? ['Good documentation'] : []),
           ...(hasProperNaming ? ['Good variable naming'] : []),
         ],
+        explanation: 'Code quality assessment based on common best practices.',
       },
       bestPractices: {
         score: 8,
@@ -131,7 +164,25 @@ export const useCodeReview = () => {
           'Consider edge cases',
           'Use consistent indentation',
         ],
+        explanation: 'General best practices for robust code development.',
       },
+      optimizations: {
+        suggestions: ['Consider algorithm optimization', 'Review data structure choices'],
+        alternativeApproaches: ['Different algorithmic approach might be possible'],
+        explanation: 'Potential optimization opportunities identified.',
+      },
+      bugs: {
+        found: [],
+        severity: 'low',
+        explanation: 'No obvious bugs detected in static analysis.',
+      },
+      summary: {
+        overallScore: Math.round(((hasComments && hasProperNaming ? 9 : 7) + 8 + (hasNestedLoops ? 6 : 9) + 8) / 4),
+        keyInsights: ['Code follows basic structure', 'Algorithm approach is reasonable'],
+        nextSteps: ['Consider AI analysis for deeper insights', 'Test with edge cases'],
+      },
+      isAIGenerated: false,
+      analysisMethod: 'mock',
     };
   };
 
@@ -152,40 +203,66 @@ export const useCodeReview = () => {
   };
 
   /**
-   * Complete the analysis simulation
+   * Complete the analysis using AI or mock data
    */
-  const completeAnalysis = useCallback((reviewId, codeData) => {
-    // Generate mock analysis based on code characteristics
-    const analysis = generateMockAnalysis(codeData);
+  const completeAnalysis = useCallback(async (reviewId, codeData) => {
+    try {
+      // Generate analysis using AI or fallback to mock
+      const analysis = await generateAIAnalysis(codeData);
+      
+      // Calculate overall score
+      const overallScore = calculateOverallScore(analysis);
 
-    setReviews(prev => prev.map(review => 
-      review.id === reviewId 
-        ? { 
-            ...review, 
-            status: 'completed',
-            analysis,
-            overallScore: calculateOverallScore(analysis),
-          }
-        : review
-    ));
+      setReviews(prev => prev.map(review => 
+        review.id === reviewId 
+          ? { 
+              ...review, 
+              status: 'completed',
+              analysis,
+              overallScore,
+              completedAt: new Date().toISOString(),
+              isAIGenerated: !analysis.aiError,
+            }
+          : review
+      ));
 
-    // Add to history
-    const historyEntry = {
-      id: reviewId,
-      problemTitle: codeData.problemTitle,
-      language: codeData.language,
-      submittedAt: new Date().toISOString(),
-      overallScore: calculateOverallScore(analysis),
-      status: 'completed',
-    };
+      // Add to history
+      const historyEntry = {
+        id: reviewId,
+        problemTitle: codeData.problemTitle,
+        language: codeData.language,
+        submittedAt: new Date().toISOString(),
+        overallScore,
+        status: 'completed',
+        isAIGenerated: !analysis.aiError,
+      };
 
-    setReviewHistory(prev => [historyEntry, ...prev]);
+      setReviewHistory(prev => [historyEntry, ...prev]);
 
-    // Update statistics
-    updateStatistics(codeData.language, calculateOverallScore(analysis));
+      // Update statistics
+      updateStatistics(codeData.language, overallScore);
 
-    setIsAnalyzing(false);
-  }, [updateStatistics]);
+      setIsAnalyzing(false);
+      
+    } catch (error) {
+      console.error('Analysis completion failed:', error);
+      
+      // Update review with error status
+      setReviews(prev => prev.map(review => 
+        review.id === reviewId 
+          ? { 
+              ...review, 
+              status: 'failed',
+              error: error.message,
+              completedAt: new Date().toISOString(),
+            }
+          : review
+      ));
+      
+      setIsAnalyzing(false);
+      setError(`Analysis failed: ${error.message}`);
+    }
+  }, [updateStatistics, generateAIAnalysis]);
 
   /**
    * Submit code for AI analysis

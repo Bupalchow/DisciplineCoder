@@ -6,6 +6,8 @@
 import { useState } from 'react';
 import { useCodeReview } from '../hooks/useCodeReview';
 import MainLayout from '../components/templates/MainLayout';
+import AIStatusIndicator from '../components/codeReview/atoms/AIStatusIndicator';
+import AISetupGuide from '../components/codeReview/atoms/AISetupGuide';
 import {
   CodeSubmissionForm,
   ReviewAnalysis,
@@ -184,6 +186,12 @@ export const CodeReviewPage = () => {
     <MainLayout>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <WelcomeSection />
+        
+        {/* AI Status Indicator */}
+        <AIStatusIndicator />
+        
+        {/* AI Setup Guide */}
+        <AISetupGuide />
         
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
