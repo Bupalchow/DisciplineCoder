@@ -14,7 +14,7 @@ import MainLayout from '../components/templates/MainLayout';
 import { Button } from '../components/atoms';
 import { ARRAYS_ROADMAP } from '../data/arraysRoadmap';
 import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
-import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
+import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadMap';
 import { STACK_ROADMAP } from '../data/stackRoadmap';
 import { QUEUE_ROADMAP } from '../data/queueRoadmap';
 import { LINKED_LISTS_ROADMAP } from '../data/linkedListsRoadmap';
@@ -23,6 +23,7 @@ import { BACKTRACKING_ROADMAP } from '../data/backtrackingRoadMap';
 import { DYNAMIC_PROGRAMMING_ROADMAP } from '../data/dynamicProgrammingRoadMap';
 import { BINARY_SEARCH_ROADMAP } from '../data/binarySearchRoadMap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
+import { Roadmap } from './index';
 
 
 /**
@@ -395,6 +396,9 @@ const DashboardPage = () => {
           </div>
         </div>
 
+        <div className="mt-8">
+          <Roadmap />
+        </div>
  
       </div>
     </MainLayout>

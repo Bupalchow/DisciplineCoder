@@ -20,3 +20,4 @@ export { default as TreesRoadmapPage } from './TreesRoadmapPage';
 export { default as BacktrackingRoadmapPage } from './BacktrackingRoadmapPage';
 export { default as DynamicProgrammingRoadmapPage } from './DynamicProgrammingRoadmapPage';
 export { default as BinarySearchRoadmapPage } from './BinarySearchRoadmapPage';
+export { default as Roadmap } from '../components/Roadmap';
