@@ -14,15 +14,16 @@ import MainLayout from '../components/templates/MainLayout';
 import { Button } from '../components/atoms';
 import { ARRAYS_ROADMAP } from '../data/arraysRoadmap';
 import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
-import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadmap';
+import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadMap';
 import { STACK_ROADMAP } from '../data/stackRoadmap';
-import { QUEUE_ROADMAP } from '../data/queueRoadmap';
-import { LINKED_LISTS_ROADMAP } from '../data/linkedListsRoadmap';
+import { QUEUE_ROADMAP } from '../data/queueRoadMap';
+import { LINKED_LISTS_ROADMAP } from '../data/linkedListsRoadMap';
 import { TREES_ROADMAP } from '../data/treesRoadmap';
 import { BACKTRACKING_ROADMAP } from '../data/backtrackingRoadMap';
 import { DYNAMIC_PROGRAMMING_ROADMAP } from '../data/dynamicProgrammingRoadMap';
 import { BINARY_SEARCH_ROADMAP } from '../data/binarySearchRoadMap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
+import QuickStatsWidget from '../components/dashboard/molecules/QuickStatsWidget';
 
 
 /**
@@ -234,24 +235,8 @@ const DashboardPage = () => {
               </p>
               
               {/* Quick Stats with better mobile layout */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-lg sm:max-w-2xl mx-auto mb-12 sm:mb-16 px-4 sm:px-0">
-                <div className="bg-white/70 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/20 shadow-lg">
-                  <div className="text-xl sm:text-2xl font-bold text-blue-600">10</div>
-                  <div className="text-xs sm:text-sm text-gray-600">Roadmaps</div>
-                </div>
-                <div className="bg-white/70 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/20 shadow-lg">
-                  <div className="text-xl sm:text-2xl font-bold text-green-600">300+</div>
-                  <div className="text-xs sm:text-sm text-gray-600">Questions</div>
-                </div>
-                <div className="bg-white/70 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/20 shadow-lg">
-                  <div className="text-xl sm:text-2xl font-bold text-purple-600">50+</div>
-                  <div className="text-xs sm:text-sm text-gray-600">Concepts</div>
-                </div>
-                <div className="bg-white/70 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/20 shadow-lg">
-                  <div className="text-xl sm:text-2xl font-bold text-orange-600">24/7</div>
-                  <div className="text-xs sm:text-sm text-gray-600">Access</div>
-                </div>
-              </div>
+              
+
             </div>
           </div>
         </div>
