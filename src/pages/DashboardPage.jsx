@@ -15,7 +15,7 @@ import { Button } from '../components/atoms';
 import { ARRAYS_ROADMAP } from '../data/arraysRoadmap';
 import { STRINGS_ROADMAP } from '../data/stringsRoadmap';
 import { HASHMAPS_SETS_ROADMAP } from '../data/hashmapsSetsRoadMap';
-import { STACK_ROADMAP } from '../data/stackRoadmap';
+import { STACK_ROADMAP } from '../data/stackRoadMap';
 import { QUEUE_ROADMAP } from '../data/queueRoadMap';
 import { LINKED_LISTS_ROADMAP } from '../data/linkedListsRoadMap';
 import { TREES_ROADMAP } from '../data/treesRoadmap';
@@ -24,6 +24,7 @@ import { DYNAMIC_PROGRAMMING_ROADMAP } from '../data/dynamicProgrammingRoadMap';
 import { BINARY_SEARCH_ROADMAP } from '../data/binarySearchRoadMap';
 import { useRoadmapProgress } from '../hooks/useRoadmapProgress';
 import QuickStatsWidget from '../components/dashboard/molecules/QuickStatsWidget';
+import DailyCodingGoal from '../components/dashboard/molecules/DailyCodingGoal';
 
 
 /**
@@ -244,6 +245,21 @@ const DashboardPage = () => {
         {/* Enhanced Roadmap Cards with Modern Design */}
         <div className="px-4 sm:px-6 lg:px-8 pb-24">
           <div className="max-w-7xl mx-auto">
+            {/* Sidebar with Quick Stats and Daily Goal */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
+              <div className="lg:col-span-1 space-y-6">
+                <QuickStatsWidget />
+                <DailyCodingGoal />
+              </div>
+              <div className="lg:col-span-3">
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Choose Your Learning Path</h2>
+                  <p className="text-gray-600">Select a roadmap to start mastering data structures and algorithms</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Roadmap Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
               {roadmaps.map((roadmap, index) => {
                 const colorClasses = getColorClasses(roadmap.color);
