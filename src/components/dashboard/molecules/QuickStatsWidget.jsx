@@ -20,15 +20,18 @@ const QuickStatsWidget = () => {
     rank: 'Bronze'
   };
 
-  const StatItem = ({ icon: Icon, label, value, color = 'text-gray-600' }) => (
-    <div className="flex items-center space-x-2">
-      <Icon className={`h-5 w-5 ${color}`} />
-      <div>
-        <p className="text-sm font-medium text-gray-900">{value}</p>
-        <p className="text-xs text-gray-500">{label}</p>
+  const StatItem = ({ icon, label, value, color = 'text-gray-600' }) => {
+    const IconComponent = icon;
+    return (
+      <div className="flex items-center space-x-2">
+        <IconComponent className={`h-5 w-5 ${color}`} />
+        <div>
+          <p className="text-sm font-medium text-gray-900">{value}</p>
+          <p className="text-xs text-gray-500">{label}</p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
